@@ -1,7 +1,7 @@
 # ng2 frontend 
 
-crud / bootstrap / primeNG integration  
+crud / bootstrap / primeNG   
 
 # ToDO
 
-initial release written from scratch in a few hours, improve the code (and naming) 
+primeNG sample
