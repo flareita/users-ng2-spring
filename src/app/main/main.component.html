@@ -1,7 +1,7 @@
 <div class="container">
  <div class="panel panel-default">
   
-    <div class="panel-heading">Users we have so far &nbsp; <input #searchBox id="search-box" (keyup)="search(searchBox.value)" /></div>
+    <div class="panel-heading">Users we have so far &nbsp; <input #searchBox id="search-box" (input)="searchTerm$.next($event.target.value)" /></div>
     <div class="panel-body">
   
 

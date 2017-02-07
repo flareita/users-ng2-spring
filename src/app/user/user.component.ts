@@ -5,11 +5,11 @@ import {Router,ActivatedRoute} from '@angular/router';
 
 @Component({
   
-  selector: 'app-add-user',
-  templateUrl: './add-user.component.html',
-  styleUrls: ['./add-user.component.css']
+  selector: 'app-user',
+  templateUrl: './user.component.html',
+  styleUrls: ['./user.component.css']
 })
-export class AddUserComponent implements OnInit {
+export class UserComponent implements OnInit {
  
  user:User=new User();
  id:any;
@@ -17,16 +17,18 @@ export class AddUserComponent implements OnInit {
 
   ngOnInit() {
   
-   this.id = this.route.params.subscribe(
-     params => {
-               this.id = +params['id']; // (+) converts string 'id' to a number
-              
-                console.log("id="+this.id); 
-              if(this.id!== undefined&&this.id!==null){
-              console.log("edit"+this.id);
-              this.service.getUser(this.id).subscribe(res=>this.user=res);
-               }
-          });
+ 
+  this.id = this.route.params.switchMap(
+   params => this.service.getUser(params['id']))
+      .subscribe(result => {
+    if (result) this.user = result; 
+    else console.log('user error');
+  });
+
+
+ 
+
+
         }
 
 
@@ -41,6 +43,7 @@ public addUser(){
 }
 
 public editUser(){
+console.log("edita"+JSON.stringify(this.user));
  this.service.editUser(this.user).subscribe(
  res=>res,
  e=>console.log(e) ,

@@ -12,14 +12,14 @@ import {UserService} from './user.service';
 import {DialogModule} from 'primeng/primeng';
 import {PanelModule} from 'primeng/primeng';
 import {ButtonModule} from 'primeng/primeng';
-import { AddUserComponent } from './add-user/add-user.component';
+import { UserComponent } from './user/user.component';
 
 const appRoutes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'contact',component: ContactComponent},
   { path: 'main',component: MainComponent},
-  { path: 'addUser/:id',component: AddUserComponent},
-  { path: 'addUser',component: AddUserComponent},
+  { path: 'addUser/:id',component: UserComponent},
+  { path: 'addUser',component: UserComponent},
   { path: '',
     redirectTo: '/main',
     pathMatch: 'full'
@@ -33,7 +33,7 @@ const appRoutes: Routes = [
     AboutComponent,
     ContactComponent,
      MainComponent,
-     AddUserComponent,
+     UserComponent,
   
   ],
   imports: [
