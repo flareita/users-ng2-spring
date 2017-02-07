@@ -1,4 +1,4 @@
-# quick ng2 frontend 
+# ng2 frontend 
 
 crud / bootstrap / primeNG integration  
 
