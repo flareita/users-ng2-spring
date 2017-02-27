@@ -1,7 +1,14 @@
 # ng2 frontend 
 
-crud / bootstrap / primeNG   
+ Angular 2 Crud Frontend
 
-# ToDO
+ Bootstap
 
-primeNG sample
+ *Redux* architecture (Ngrx) with DevTools, Async Side Effects and composable selectors (reselect) 
+
+ ## ToDo
+ 
+ add PrimeNg
+
+
+

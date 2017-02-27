@@ -1,0 +1,32 @@
+<div class="container">
+ <div class="panel panel-default">
+  
+    <div class="panel-heading">Users we have so far &nbsp; <input #searchBox id="search-box" [(ngModel)]="query" (input)="searchTerm$.next($event.target.value)" value="" /></div>
+    <div class="panel-body">
+  
+
+    <table class="table table-light">
+    <thead>
+      <th>username</th>
+      <th>password</th>
+      <th>email</th>
+    </thead>
+    <tbody >
+      <tr  *ngFor="let user of users$ | async " >
+      <td>{{user.username}}</td>
+        <td>{{user.password}}</td>
+        <td>{{user.email}}</td>
+         <td><button routerLink="/addUser/{{user.id}}"  type="button" routerLinkActive="active" class="btn btn-small btn-primary"> Edit</button>
+             <button (click)="delUser(user.id,$event)"    type="button" class="btn btn-small btn-danger">Delete</button>
+        </td>
+      </tr>
+    <a  routerLink="/addUser" routerLinkActive="active" class="btn btn-small btn-primary">Add</a>
+   
+    </tbody>
+  </table>
+
+ </div>
+</div>
+
+
+

@@ -1,8 +1,10 @@
+import {Observable} from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Http, Response, Request, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/map';
-import { User } from './user'
+
+import { User } from '../models/user'
 
 @Injectable()
 export class UserService {
@@ -29,8 +31,7 @@ export class UserService {
     let options = new RequestOptions({ headers: headers });
     let payload = JSON.stringify(user);
 
-    return this.http.put(this.edit_user_uri + user.id, payload, options);
-
+    return this.http.put(this.edit_user_uri + user.id, payload, options).map(x=>x.json());
   }
 
 
@@ -41,13 +42,12 @@ export class UserService {
   }
 
 
-  public addUser(user: User) {
+  public addUser(user: any) {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
     let payload = JSON.stringify(user);
 
-    console.log("adding user");
-    return this.http.post(this.add_user_uri, payload, options);
+    return  this.http.post(this.add_user_uri, payload, options).map(x=>x.json());
 
 
   }
@@ -61,7 +61,8 @@ export class UserService {
   public deleteUser(id) {
 
     console.log("deleting user " + id);
-    return this.http.delete(this.del_user_uri + id);
+     this.http.delete(this.del_user_uri + id);
+     return Observable.of(id);
 
   }
 

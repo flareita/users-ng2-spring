@@ -19,11 +19,12 @@
 </div>
 <div class="form-group row">
   <div class="col-10">
-    <button *ngIf="!user.id" (click)="addUser()" class="btn btn-primary" >OK</button>
-    <button *ngIf="user.id" (click)="editUser()" class="btn btn-primary" >OK</button>
-    <button (click)="cancel()" class="btn btn-danger" >Cancel</button>
+    <button *ngIf="!user.id" (click)="addUser()"  type="button" class="btn btn-primary" >OK</button>
+    <button *ngIf="user.id" (click)="editUser()"  type="button" class="btn btn-primary" >OK</button>
+    <button (click)="cancel()"  type="button" class="btn btn-danger" >Cancel</button>
   </div>
 </div>
 
 
 </form>
+<div>{{user|json}}</div>
