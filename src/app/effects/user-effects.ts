@@ -19,23 +19,34 @@ export class UserEffects {
 
 
 
+// @Effect() searchUsers$ = this.update$
+//         .ofType(SearchActions.SEARCH_USERS)
+//         .debounceTime(500)
+//         .map(action => action.payload)
+//         .switchMap(
+//                 query => {
+//                 if (query === '') {
+//                          return empty();
+//                 }
+//                 const nextSearch$ = this.update$.ofType(SearchActions.SEARCH_USERS).skip(1);
+//         return this.service.search(query)
+//         .takeUntil(nextSearch$)
+//         .map(users =>  this.searchActions.searchUsersSuccess(users))
+//         .catch(() => of(this.searchActions.searchUsersSuccess([])));
+//     });
+
+
 @Effect() searchUsers$ = this.update$
         .ofType(SearchActions.SEARCH_USERS)
         .debounceTime(500)
         .map(action => action.payload)
-        .switchMap(
-                query => {
-                if (query === '') {
-                         return empty();
-                }
-                const nextSearch$ = this.update$.ofType(SearchActions.SEARCH_USERS).skip(1);
-        return this.service.search(query)
-        .takeUntil(nextSearch$)
+        .switchMap(query=>this.service.search(query))
         .map(users =>  this.searchActions.searchUsersSuccess(users))
         .catch(() => of(this.searchActions.searchUsersSuccess([])));
-    });
+    
 
-                
+
+
    /* at startup 
    */             
 
@@ -54,7 +65,7 @@ export class UserEffects {
         .switchMap(id => this.service.getUser(id))
         .map(user => this.userActions.loadUserSuccess(user));
 
- @Effect() saveHero$ = this.update$
+ @Effect() saveUser$ = this.update$
         .ofType(UserActions.SAVE_USER)
         .map(action => action.payload)
         .switchMap(user => this.service.editUser(user))
@@ -67,7 +78,7 @@ export class UserEffects {
         .map(user => this.userActions.addUserSuccess(user));
 
 
-@Effect() deleteHero$ = this.update$
+@Effect() deleteUser$ = this.update$
         .ofType(UserActions.DELETE_USER)
         .map(action => action.payload)
        .switchMap(id => this.service.deleteUser(id))

@@ -5,5 +5,6 @@ export class User {
      password:string;
      email:string;
      serial:number;
+     country:string;
 
 }

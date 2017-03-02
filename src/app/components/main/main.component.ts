@@ -14,6 +14,7 @@ import { SearchActions } from '../../actions/search-actions';
 import { UserActions } from '../../actions/user-actions';
 import 'rxjs/Rx';
 import 'rxjs/add/operator/mergeMap';
+import { Subscription } from "rxjs/Subscription";
 
 @Component({
   selector: 'app-main',
@@ -21,11 +22,18 @@ import 'rxjs/add/operator/mergeMap';
   styleUrls: ['./main.component.css']
 
 })
-export class MainComponent implements OnInit {
+export class MainComponent implements OnInit , OnDestroy{
 
-  sub: any;
+  
+  usersObs$: Observable<User[]>;
+  searchObs$: Observable<User[]>;
   users$: Observable<User[]>;
+  alive=true;
+
+  
+  
   searchTerm$ = new Subject<string>();
+  searchUsers$: Observable<User[]>;
   query: string;
   display: boolean = false;
 
@@ -36,30 +44,43 @@ export class MainComponent implements OnInit {
 
   ) { }
 
+ngOnDestroy() {
+  //Called once, before the instance is destroyed.
+  //Add 'implements OnDestroy' to the class.
+  
+  //prevents memory leaks even though the async pipe unsubscribes
+  this.alive=false;
+}
 
   ngOnInit() {
 
-    /* we wait for the first effect to be available on the store
-    */
+   
 
-    this.searchTerm$.subscribe(query => this.search(query));
+    this.searchTerm$.subscribe(query => this.search(query)); 
+     
 
-    //load the full store 
-    //   this.users$=this.store.select('users').filter(x=>x!=undefined)
-    // .flatMap( ()=>this.store.select<User[]>(fromRoot.getUsers));
+    //the users
+    this.users$=this.usersObs$=this.store.select('users').filter(x=>x!=undefined)
+      .flatMap(()=>this.store.select<User[]>(fromRoot.getUsers))
+      .takeWhile(()=>this.alive=true);
 
-    this.users$ = this.store.select<User[]>(fromRoot.getSearchResults);
-
-
+     //search 
+      this.searchObs$= this.store.select<User[]>(fromRoot.getSearchResults).takeWhile(()=>this.alive=true);
+  
+        
   }
 
 
 
   search(stringa: string) {
     console.log(stringa);
-
-    this.store.dispatch(this.searchAction.searchUsers(stringa.trim()))
-
+    if(stringa===''){
+         this.users$=this.usersObs$;
+    }
+     else{
+        this.store.dispatch(this.searchAction.searchUsers(stringa))
+        this.users$=this.searchObs$;
+    }
   }
 
 

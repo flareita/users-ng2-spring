@@ -4,11 +4,17 @@
 
  Bootstap
 
- *Redux* architecture (Ngrx) with DevTools, Async Side Effects and composable selectors (reselect) 
+ *Redux* (Ngrx) with DevTools 
+ 
+ Async Side Effects 
+ 
+ composable selectors (reselect) 
+ 
+ reactive forms  
 
  ## ToDo
  
- add PrimeNg
+ add PrimeNg widgets 
 
 
 

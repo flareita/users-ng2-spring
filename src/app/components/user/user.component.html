@@ -1,22 +1,41 @@
-<form #f>
+<dir class="myForm">
+<form [formGroup]="userForm" novalidate >
 <div class="form-group row">
   <label for="username" class="col-2 col-form-label">username</label>
   <div class="col-10">
-    <input class="form-control" type="text" name="username" #username [(ngModel)]="user.username">
+    <input class="form-control" type="text" formControlName="username">
+    <p *ngIf="userForm.controls.username.errors&&!userForm.controls['username'].pristine">This field is required!</p>
+
   </div>
 </div>
 <div class="form-group row">
   <label for="password" class="col-2 col-form-label">password</label>
   <div class="col-10">
-    <input class="form-control" type="password" name="password" #password  [(ngModel)]="user.password">
-  </div>
+    <input class="form-control" type="password" formControlName="password">
+    <p *ngIf="userForm.controls.password.errors&&!userForm.controls['password'].pristine">This field is required!</p>
+ </div>
 </div>
 <div class="form-group row">
   <label for="email" class="col-2 col-form-label">email</label>
   <div class="col-10">
-    <input class="form-control" type="text" name="email" #email [(ngModel)]="user.email">
+    <input class="form-control" type="text" formControlName="email">
+     <p *ngIf="userForm.controls.email.errors&&!userForm.controls['email'].pristine">This field is required!</p>
+
   </div>
 </div>
+
+<div class="form-group row">
+  
+  <label *ngIf="!(state$|async)" for="state" class="col-2 col-form-label">state (loading...)</label>
+  <label *ngIf="state$|async" for="state" class="col-2 col-form-label">state</label>
+  <div class="col-10" *ngIf="state$|async">
+    <select formControlName="country" (ngModelChange)="onChange($event)" name="country">
+     <option value="" disabled selected >select state</option>
+     <option [value]="item.name" *ngFor="let item of state$ | async">{{item.name}}</option>
+    </select>
+  </div>
+</div>
+
 <div class="form-group row">
   <div class="col-10">
     <button *ngIf="!user.id" (click)="addUser()"  type="button" class="btn btn-primary" >OK</button>
@@ -27,4 +46,6 @@
 
 
 </form>
+<div>{{userForm.value|json}}</div>
 <div>{{user|json}}</div>
+</dir >

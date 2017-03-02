@@ -61,9 +61,8 @@ export class UserService {
   public deleteUser(id) {
 
     console.log("deleting user " + id);
-     this.http.delete(this.del_user_uri + id);
-     return Observable.of(id);
-
+     return this.http.delete(this.del_user_uri + id).map(x => x.json());
+  
   }
 
 

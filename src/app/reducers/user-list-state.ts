@@ -38,8 +38,8 @@ export  function reducer(state = initialState, action: Action): State {
             const newUserIds = newUsers.map(user=> user.id);
             //user.id=user using reduce
             const newUserPayload = newUsers.reduce(
-                (users: { [id: string]: User }, user: User) => {
-                    return Object.assign(users, { [user.id]: user});
+                (entities: { [id: string]: User }, user: User) => {
+                    return Object.assign(entities, { [user.id]: user});
         }, {});
 
             let ret= {
@@ -91,14 +91,21 @@ export  function reducer(state = initialState, action: Action): State {
         
 
       case UserActions.DELETE_USER_SUCCESS: {
-            
-            const userIds=state.ids.filter(id=> id!=action.payload);
+            let newUsers=[];
+            const newIds=state.ids.filter(id=> id!=action.payload);
+             newIds.forEach(id=>newUsers.push(state.entities[id]));
+
+
+             const newUserPayload = newUsers.reduce(
+                (entities: { [id: string]: User }, user: User) => {
+                    return Object.assign(entities, { [user.id]: user});
+                 }, {});
 
             console.log('delete redux= '+action.payload);
             
             const obj = {
-                 ids: userIds,
-                 entities: state.entities, 
+                 ids: newIds,
+                 entities: newUserPayload, 
                  loaded: true,
                  selectedId:state.selectedId
 

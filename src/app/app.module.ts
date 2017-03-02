@@ -1,7 +1,7 @@
 import {EffectsModule} from '@ngrx/effects';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -11,6 +11,8 @@ import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { MainComponent } from './components/main/main.component';
 import {UserService} from './services/user.service';
+import {LookupService} from './services/lookup.service';
+
 import {DialogModule} from 'primeng/primeng';
 import {PanelModule} from 'primeng/primeng';
 import {ButtonModule} from 'primeng/primeng';
@@ -48,6 +50,7 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
      DialogModule,
      PanelModule,
@@ -59,7 +62,7 @@ const appRoutes: Routes = [
 
    RouterModule.forRoot(appRoutes)
   ],
-   providers: [UserService,UserActions,SearchActions],
+   providers: [UserService, LookupService, UserActions,SearchActions],
      bootstrap: [AppComponent]
 })
 export class AppModule { }
