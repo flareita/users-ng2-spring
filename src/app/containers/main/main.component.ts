@@ -70,10 +70,12 @@ ngOnDestroy() {
         
   }
 
-
+nextFlow(q:string){
+  this.searchTerm$.next(q);
+}
 
   search(stringa: string) {
-    console.log(stringa);
+    console.log('query is '+ stringa);
     if(stringa===''){
          this.users$=this.usersObs$;
     }
@@ -88,8 +90,8 @@ ngOnDestroy() {
     this.display = true;
   }
 
-  public delUser(id: number, e: Event) {
-    e.stopPropagation();
+  public deleteUser(id: number) {
+  //  e.stopPropagation();
     console.log("delete id=" + id);
 
     this.store.dispatch(this.userAction.deleteUser(id));

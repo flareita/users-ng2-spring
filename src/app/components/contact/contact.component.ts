@@ -7,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContactComponent implements OnInit {
 
+ visible: boolean;
   constructor() { }
 
   ngOnInit() {
-  }
+ this.visible=true;  
+}
 
 }

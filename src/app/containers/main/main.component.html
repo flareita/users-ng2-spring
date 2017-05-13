@@ -1,0 +1,30 @@
+<div class="container">
+ <div class="panel panel-default">
+  
+    <div class="panel-heading">Users we have so far &nbsp;  <app-search [query]="query" (flow)="nextFlow($event)" ></app-search>   </div>
+    <div class="panel-body">
+  
+
+    <table class="table table-light">
+    <thead>
+      <th>username</th>
+      <th>password</th>
+      <th>email</th>
+      <th></th>
+
+            
+      
+    </thead>
+    <tbody >
+     <tr line-item [user]="user"  (delete)="deleteUser($event)" *ngFor="let user of users$|async"  ></tr>
+
+     <a routerLink="/addUser" routerLinkActive="active" class="btn btn-small btn-primary">Add</a>
+   
+    </tbody>
+  </table>
+
+ </div>
+</div>
+
+
+

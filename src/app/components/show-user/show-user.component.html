@@ -1,0 +1,8 @@
+ 
+      <td >{{user.username}}</td>
+      <td >{{user.password}}</td>
+      <td >{{user.email}}</td>
+      <td >
+        <button routerLink="/addUser/{{user.id}}"  type="button" routerLinkActive="active" class="btn btn-small btn-primary"> Edit</button>
+             <button (click)="delete.emit(user.id)"    type="button" class="btn btn-small btn-danger">Delete</button>
+        </td>

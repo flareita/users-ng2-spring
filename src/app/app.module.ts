@@ -6,22 +6,24 @@ import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { routerReducer, RouterStoreModule } from '@ngrx/router-store';
-import { AppComponent } from './components/app.component';
+import { AppLayout } from './containers/layout/app.layout';
 import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
-import { MainComponent } from './components/main/main.component';
+import { MainComponent } from './containers/main/main.component';
 import {UserService} from './services/user.service';
 import {LookupService} from './services/lookup.service';
 
 import {DialogModule} from 'primeng/primeng';
 import {PanelModule} from 'primeng/primeng';
 import {ButtonModule} from 'primeng/primeng';
-import { UserComponent } from './components/user/user.component';
+import { UserComponent } from './containers/user/user.component';
 import {Store, StoreModule} from '@ngrx/store';
 import * as redux from './reducers';
 import {UserEffects} from './effects/user-effects';
 import {UserActions} from './actions/user-actions';
 import {SearchActions} from './actions/search-actions';
+import { SearchComponent } from './components/search/search.component';
+import { ShowUserComponent } from './components/show-user/show-user.component';
 
 const appRoutes: Routes = [
   { path: 'about', component: AboutComponent },
@@ -40,11 +42,13 @@ const appRoutes: Routes = [
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppLayout,
     AboutComponent,
     ContactComponent,
      MainComponent,
      UserComponent,
+     SearchComponent,
+     ShowUserComponent,
   
   ],
   imports: [
@@ -63,6 +67,6 @@ const appRoutes: Routes = [
    RouterModule.forRoot(appRoutes)
   ],
    providers: [UserService, LookupService, UserActions,SearchActions],
-     bootstrap: [AppComponent]
+     bootstrap: [AppLayout]
 })
 export class AppModule { }

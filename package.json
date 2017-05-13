@@ -28,6 +28,7 @@
     "@ngrx/store": "^2.2.1",
     "@ngrx/store-devtools": "^3.2.3",
     "@types/node": "^6.0.63",
+    "bootstrap": "^3.3.7",
     "codelyzer": "^2.0.1",
     "core-js": "^2.4.1",
     "ngrx-store-freeze": "^0.1.9",
