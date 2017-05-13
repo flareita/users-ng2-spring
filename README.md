@@ -14,7 +14,6 @@
 
  ## ToDo
  
- add PrimeNg widgets 
-
+add normalizr
 
 
