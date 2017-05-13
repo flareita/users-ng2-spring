@@ -49,22 +49,14 @@ export function reducer(state: any, action: any) {
  export const getSelectedUser = createSelector(getUsersState, fromUserList.getSelected);
 
 
-/**
- * Just like with the books selectors, we also have to compose the search
- * reducer's and collection reducer's selectors.
- */
 
 export const getSearchUserIds = createSelector(getSearchState, fromSearch.getIds);
 export const getSearchQuery = createSelector(getSearchState, fromSearch.getQuery);
 export const getSearchLoading = createSelector(getSearchState, fromSearch.getLoading);
 
 
-/**
- * Some selector functions create joins across parts of state. This selector
- * composes the search result IDs to return an array of books in the store.
- */
-export const getSearchResults = createSelector(getUserEntities, getSearchUserIds, (books, searchIds) => {
-  return searchIds.map(id => books[id]);
+export const getSearchResults = createSelector(getUserEntities, getSearchUserIds, (users, searchIds) => {
+  return searchIds.map(id => users[id]);
 });
 
 

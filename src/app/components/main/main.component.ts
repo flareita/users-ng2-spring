@@ -48,8 +48,8 @@ ngOnDestroy() {
   //Called once, before the instance is destroyed.
   //Add 'implements OnDestroy' to the class.
   
-  //prevents memory leaks even though the async pipe unsubscribes
   this.alive=false;
+  this.searchTerm$.unsubscribe();
 }
 
   ngOnInit() {

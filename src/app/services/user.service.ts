@@ -10,18 +10,14 @@ import { User } from '../models/user'
 export class UserService {
 
 
-  get_users_uri = "http://localhost:8080/demo/api/users";
-  add_user_uri = "http://localhost:8080/demo/api/user/add";
-  del_user_uri = "http://localhost:8080/demo/api/delete/";
-  get_user_uri = "http://localhost:8080/demo/api/user/";
-  edit_user_uri = "http://localhost:8080/demo/api/user/edit/";
-  get_username_uri = "http://localhost:8080/demo/api/username/";
+  base_uri = "http://localhost:8080/demo/api/users/";
+  get_username_uri = "http://localhost:8080/demo/api/usernames/";
 
   constructor(private http: Http) { }
 
   public getUsers() {
     console.log("calling getUsers");
-    return this.http.get(this.get_users_uri)
+    return this.http.get(this.base_uri)
       .map(res => res.json());
 
   }
@@ -31,12 +27,12 @@ export class UserService {
     let options = new RequestOptions({ headers: headers });
     let payload = JSON.stringify(user);
 
-    return this.http.put(this.edit_user_uri + user.id, payload, options).map(x=>x.json());
+    return this.http.put(this.base_uri + user.id, payload, options).map(x=>x.json());
   }
 
 
   public getUser(id: any) {
-    return this.http.get(this.get_user_uri + id)
+    return this.http.get(this.base_uri + id)
       .map(res => res.json());
 
   }
@@ -47,7 +43,7 @@ export class UserService {
     let options = new RequestOptions({ headers: headers });
     let payload = JSON.stringify(user);
 
-    return  this.http.post(this.add_user_uri, payload, options).map(x=>x.json());
+    return  this.http.post(this.base_uri, payload, options).map(x=>x.json());
 
 
   }
@@ -61,7 +57,7 @@ export class UserService {
   public deleteUser(id) {
 
     console.log("deleting user " + id);
-     return this.http.delete(this.del_user_uri + id).map(x => x.json());
+     return this.http.delete(this.base_uri + id).map(x => x.json());
   
   }
 
