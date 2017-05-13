@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
+import {USER_SCHEMA,USER_ARRAY} from '../schemas/schema';
+import {normalize} from 'normalizr';
+
 @Injectable()
 export class UserActions {
 
@@ -14,10 +17,29 @@ export class UserActions {
 
   static LOAD_USERS_SUCCESS = 'Load Users Success';
   public loadUsersSuccess(users): Action {
-    console.log('LOAD'+JSON.stringify(users));
+    
+    
+    //normalize the state to simplify the work in the reducer 
+    /*
+{ 
+     entities: 
+                    { users: {
+                                       '117': {..., 
+                                       '135': {... 
+                                   } 
+                    },
+  result: [ 117, 135 ] 
+}
+
+    */
+
+    
+    let normalized=normalize(users, USER_ARRAY);
+    
+    //console.log('LOAD'+JSON.stringify(normalized));
     return {
       type: UserActions.LOAD_USERS_SUCCESS,
-      payload: users
+      payload: normalized
     };
   }
 

@@ -33,23 +33,17 @@ export  function reducer(state = initialState, action: Action): State {
        }
     
         case UserActions.LOAD_USERS_SUCCESS: {
-            const users = action.payload;
-            const newUsers = users.filter(user => !state.entities[user.id])
-            const newUserIds = newUsers.map(user=> user.id);
-            //user.id=user using reduce
-            const newUserPayload = newUsers.reduce(
-                (entities: { [id: string]: User }, user: User) => {
-                    return Object.assign(entities, { [user.id]: user});
-        }, {});
-
+            const entities = action.payload.entities.users;
+            const ids = action.payload.result;
+            
             let ret= {
-                ids: [...state.ids, ...newUserIds],
-                entities: Object.assign({}, state.entities,newUserPayload),
+                ids: [...state.ids,...ids],
+                entities: Object.assign({}, state.entities,entities),
                 loaded: true,
                 selectedId:state.selectedId
             };
 
-            console.log('load redux= '+JSON.stringify(ret));
+            
             return ret;
         }
         

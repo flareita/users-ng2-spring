@@ -10,11 +10,11 @@
  
  composable selectors (reselect) 
  
+ normalizr (state normalizer)
+
  reactive forms  
 
- ## ToDo
- 
- add PrimeNg widgets 
+
 
 
 

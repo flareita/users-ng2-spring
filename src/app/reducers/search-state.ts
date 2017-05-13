@@ -35,9 +35,9 @@ export  function reducer (state = initialState, action: Action): State {
       });
     }
      case SearchActions.SEARCH_USERS_SUCCESS: {
-    const users = action.payload;
+    const result = action.payload.result;
     let obj= {
-        ids: users.map(user => user.id),
+        ids: result,
         loading: false,
         query: state.query
       };

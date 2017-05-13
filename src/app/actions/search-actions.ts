@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
+import {USER_SCHEMA,USER_ARRAY} from '../schemas/schema';
+import {normalize} from 'normalizr';
 @Injectable()
 export class SearchActions {
 
@@ -17,9 +19,11 @@ static SEARCH_USERS = 'Search Users';
 
   static SEARCH_USERS_SUCCESS = 'Search Users Success';
   public searchUsersSuccess(users): Action {
+      let normalized=normalize(users, USER_ARRAY);    
+    
     return {
       type: SearchActions.SEARCH_USERS_SUCCESS,
-      payload: users
+      payload: normalized
     };
   }
 
